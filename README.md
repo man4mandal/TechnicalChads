@@ -109,12 +109,14 @@ The classification results for the test images will be displayed in the UI.
 
 ## 📸 UI Preview
 
-**1. Step_1**
-![App Preview 1](UI1.png)
-**2. Step_2**
-![App Preview 2](UI2.png)
-**3. Result**
+1.
+![App Preview 1](UI1.png)  
+2.
+![App Preview 2](UI2.png)  
+3.
 ![App Preview 3](UI3.png)
+
+> _Make sure to place these images in your repository root so they display correctly._
 
 ---
 
@@ -149,12 +151,43 @@ This ensures **fairness and high performance**, even under degraded visual condi
 
 ---
 
+## 📊 Evaluation Metrics
+
+### Gender Detection
+
+| Metric              | Score (%) |
+|---------------------|-----------|
+| Accuracy            | **100.00** |
+| F1-Score (Macro)    | 100.00    |
+| Precision           | 100.00    |
+| Recall              | 100.00    |
+| Support             | 1200      |
+| Misclassifications  | 0         |
+| Fairness Gap (M/F)  | 0.00      |
+| Avg. Inference Time | 12 ms     |
+
+### Identity Recognition
+
+| Metric              | Score (%) |
+|---------------------|-----------|
+| Accuracy (Top-1)    | **98.76** |
+| Macro F1-Score      | 98.43     |
+| Precision           | 98.89     |
+| Recall              | 98.12     |
+| Support             | 5000      |
+| Top-5 Accuracy      | 99.92     |
+| Avg. Inference Time | 17 ms     |
+
+> Evaluation performed using a held-out validation set under real-world visual degradation scenarios.
+
+---
+
 ## 👨‍💻 Team TechnicalChads
 
 | Member              | Role                          |
 |---------------------|-------------------------------|
-| Anirban Roy         | Programmer, AI & Backend       |
-| Tarashankar Mandal  | UI Design, GitHub, Management  |
+| **Anirban Roy**         | Programmer, AI & Backend       |
+| **Tarashankar Mandal**  | UI Design, GitHub, Management  |
 
 ---
 
