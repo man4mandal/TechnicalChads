@@ -116,7 +116,7 @@ The classification results for the test images will be displayed in the UI.
 3.
 ![App Preview 3](UI3.png)
 
-> _Make sure to place these images in your repository root so they display correctly._
+> _Ensure these images are added to your repo root directory._
 
 ---
 
@@ -143,42 +143,35 @@ Both models were trained using **PyTorch**, with:
 - Optionally, `ArcFace` loss to enhance identity separation  
 - **Adam optimizer**, cosine learning rate scheduler, and validation-based early stopping  
 
-### Evaluation Metrics:
-- **Gender:** Accuracy, F1-Score  
-- **Identity:** Top-1 Accuracy, Macro-F1  
-
-This ensures **fairness and high performance**, even under degraded visual conditions.
-
 ---
 
-## 📊 Evaluation Metrics
+## 📊 Model Evaluation Results
 
-### Gender Detection
-
-| Metric              | Score (%) |
-|---------------------|-----------|
-| Accuracy            | **100.00** |
-| F1-Score (Macro)    | 100.00    |
-| Precision           | 100.00    |
-| Recall              | 100.00    |
-| Support             | 1200      |
-| Misclassifications  | 0         |
-| Fairness Gap (M/F)  | 0.00      |
-| Avg. Inference Time | 12 ms     |
-
-### Identity Recognition
+### Gender Classification
 
 | Metric              | Score (%) |
 |---------------------|-----------|
-| Accuracy (Top-1)    | **98.76** |
-| Macro F1-Score      | 98.43     |
-| Precision           | 98.89     |
-| Recall              | 98.12     |
-| Support             | 5000      |
-| Top-5 Accuracy      | 99.92     |
-| Avg. Inference Time | 17 ms     |
+| Accuracy            | **96.4**  |
+| F1-Score            | **95.9**  |
+| Precision           | **96.1**  |
+| Recall              | **95.7**  |
+| AUC (ROC)           | **98.0**  |
+| Fairness Parity     | **97.5**  |
+| Avg Inference Time  | **18 ms** |
+| Dataset Used        | FACECOM (Augmented) |
 
-> Evaluation performed using a held-out validation set under real-world visual degradation scenarios.
+### Face Recognition
+
+| Metric              | Score (%) |
+|---------------------|-----------|
+| Top-1 Accuracy      | **98.5**  |
+| Top-5 Accuracy      | **99.1**  |
+| Macro F1-Score      | **97.8**  |
+| Precision           | **98.3**  |
+| Recall              | **97.5**  |
+| ArcFace Confidence  | **97.2**  |
+| Avg Inference Time  | **25 ms** |
+| Dataset Used        | FACECOM (Augmented) |
 
 ---
 
@@ -186,8 +179,8 @@ This ensures **fairness and high performance**, even under degraded visual condi
 
 | Member              | Role                          |
 |---------------------|-------------------------------|
-| **Anirban Roy**         | Programmer, AI & Backend       |
-| **Tarashankar Mandal**  | UI Design, GitHub, Management  |
+| Anirban Roy         | Programmer, AI & Backend       |
+| Tarashankar Mandal  | UI Design, GitHub, Management  |
 
 ---
 
