@@ -1,38 +1,37 @@
 # 🧠 Hackathon AI Face Classifier — TechnicalChads
 
-Developed by **Anirban Roy** and **Tarashankar Mandal**, this project is a Python-based AI classification tool that uses deep learning for face and gender recognition. Built with `facenet-pytorch`, `torch`, and `customtkinter`, it features a minimal UI for batch image analysis.
+Developed by **Anirban Roy** and **Tarashankar Mandal**, this project is a Python-based AI face and gender recognition tool. It uses deep learning models with a minimal custom UI to classify test images in batches. The final results can also be exported as `.json` files for further use.
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Setup Instructions
 
-### 1. Clone the Repository
+Follow these steps to run the project locally:
+
+### 1. Clone the GitHub Repository
 ```bash
 git clone https://github.com/man4mandal/TechnicalChads.git
 ```
 
-> Or download the ZIP and extract it to a desired location on your local machine.
+### 2. Extract (if Downloaded as ZIP)
+If you downloaded the repo as a `.zip`, extract it to your desired local directory.
 
-### 2. Open the Folder in Your Python IDE
+### 3. Open the Folder in a Python Coding Interface
+Use any Python IDE (VSCode, PyCharm, etc.) to open the project folder.
 
-Use VSCode, PyCharm, or any preferred Python editor to open the extracted/cloned folder.
-
-### 3. Open the Main Python File
-
-Inside the folder, open:
-
+### 4. Open the Main Python File
+Inside your IDE, open:
 ```
 Hackathon_Final Project.py
 ```
 
-### 4. Set Up Python Virtual Environment (Python 3.8.10)
-
+### 5. Create a Python Virtual Environment (Python 3.8.10)
 In the terminal:
 ```bash
 python -m venv venv
 ```
 
-Activate the virtual environment:
+Activate the environment:
 
 - **Windows:**
   ```bash
@@ -43,8 +42,8 @@ Activate the virtual environment:
   source venv/bin/activate
   ```
 
-### 5. Install Required Dependencies
-
+### 6. Install Python Dependencies
+Run the following commands in your terminal:
 ```bash
 pip install Pillow
 pip install customtkinter
@@ -52,39 +51,32 @@ pip install torch torchvision
 pip install facenet-pytorch
 ```
 
-### 6. Set File Paths in Code
-
-Update the following variables in `Hackathon_Final Project.py` to match your local directory paths:
-
+### 7. Update File Path Variables
+In the Python file `Hackathon_Final Project.py`, update the following variables to point to your local paths:
 ```python
 face_model_path = r"your_local_path\face_model.pt"
 gender_model_path = r"your_local_path\gender_model.pt"
 train_folder = r"your_local_path\train_images"
 ```
 
-> Replace `your_local_path` with the full path where the models and folders are stored on your system.
+> Replace `your_local_path` with the actual local directory path where the files exist.
 
-### 7. Run the Program
-
+### 8. Run the Program
 ```bash
 python "Hackathon_Final Project.py"
 ```
 
-### 8. Choose Test Batch
+### 9. Select the Test Folder
+- Choose the `test_batch` folder when prompted by the UI.
+- Click **OK**.
 
-When the UI launches:
-
-- Select the folder named `test_batch`
-- Press **OK**
-
-### 9. ✅ View Final Results
-
-The classification results for the test images will be displayed in the UI.
+### 10. ✅ View and Export Results
+- Results will be displayed inside the interface.
+- Optionally, click **"Export Results"** to save the predictions to a `.json` file for offline use or data analysis.
 
 ---
 
 ## 📁 Project Structure
-
 ```
 📦 TechnicalChads/
 ├── Hackathon_Final Project.py
@@ -98,50 +90,11 @@ The classification results for the test images will be displayed in the UI.
 ---
 
 ## 🛠 Tech Stack
-
 - Python 3.8.10
 - PyTorch
 - facenet-pytorch
 - CustomTkinter
 - Pillow
-
----
-
-## 📸 UI Preview
-
-1.
-![App Preview 1](UI1.png)  
-2.
-![App Preview 2](UI2.png)  
-3.
-![App Preview 3](UI3.png)
-
-> _Ensure these images are added to your repo root directory._
-
----
-
-## 🎯 Sample Answer for Face Recognition and Gender Classification Training
-
-Our AI system is trained using the **FACECOM** dataset, which contains over **5,000 face images** captured under challenging conditions like blur, low light, fog, and overexposure. We approached it as a two-task pipeline:
-
-### Task A — Gender Classification:
-We fine-tuned a **pre-trained ResNet-50** model by replacing the final layer to classify between **Male** and **Female**.
-
-### Task B — Face Recognition:
-We used a **FaceNet-based architecture** (`InceptionResnetV1`) to classify unique person identities. The final dense layer maps to all known individual IDs.
-
-To ensure robustness, we applied **real-world augmentations** during training such as:
-
-- Gaussian blur  
-- Brightness and contrast variation  
-- Motion blur  
-- Shadow simulation  
-
-Both models were trained using **PyTorch**, with:
-
-- `CrossEntropyLoss` for classification  
-- Optionally, `ArcFace` loss to enhance identity separation  
-- **Adam optimizer**, cosine learning rate scheduler, and validation-based early stopping  
 
 ---
 
@@ -175,6 +128,28 @@ Both models were trained using **PyTorch**, with:
 
 ---
 
+## 📸 UI Preview
+
+1. ![App Preview 1](UI1.png)  
+2. ![App Preview 2](UI2.png)  
+3. ![App Preview 3](UI3.png)
+
+> _Place these images in your repo directory to render them correctly on GitHub._
+
+---
+
+## 🎯 Training Summary
+
+Our models were trained using the **FACECOM dataset** (simulated, ~5,000 images) under challenging visual conditions like blur, fog, low light, and overexposure.
+
+- **Gender Detection:** Fine-tuned ResNet-50  
+- **Face Recognition:** InceptionResnetV1 (FaceNet-based)  
+- **Augmentations:** Gaussian blur, shadow simulation, brightness changes, motion blur  
+- **Loss Functions:** CrossEntropyLoss, ArcFace (optional)  
+- **Optimization:** Adam + Cosine Annealing + Early Stopping  
+
+---
+
 ## 👨‍💻 Team TechnicalChads
 
 | Member              | Role                          |
@@ -185,21 +160,18 @@ Both models were trained using **PyTorch**, with:
 ---
 
 ## 📄 License
-
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 ## 🤝 Contributions
-
 Feel free to fork the repo, open issues, or make pull requests to improve this project.
 
 ---
 
 ## 💡 Tip
-
 Always use raw strings (`r"path\to\file"`) in Python to avoid path formatting issues on Windows.
 
 ---
 
-Happy Building! ⚙️✨
+Happy Hacking! 🧠✨
