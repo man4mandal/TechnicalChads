@@ -109,14 +109,12 @@ The classification results for the test images will be displayed in the UI.
 
 ## 📸 UI Preview
 
-1.
+1. Step1
 ![App Preview 1](UI1.png)
-2.
+2. Step2
 ![App Preview 2](UI2.png)
-3.
+3. Result
 ![App Preview 3](UI3.png)
-
-> _Make sure to place these images in your repository root so they display correctly._
 
 ---
 
