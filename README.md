@@ -130,9 +130,14 @@ python "Hackathon_Final Project.py"
 
 ## 📸 UI Preview
 
-1. ![App Preview 1](UI1.png)  
-2. ![App Preview 2](UI2.png)  
-3. ![App Preview 3](UI3.png)
+1.
+    ![App Preview 1](UI1.png)  
+
+2.
+    ![App Preview 2](UI2.png)  
+
+3.
+   ![App Preview 3](UI3.png)
 
 > _Place these images in your repo directory to render them correctly on GitHub._
 
