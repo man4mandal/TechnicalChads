@@ -38,9 +38,9 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 # Configuration (update paths as needed)
-face_model_path = r"C:\Users\ADMIN\OneDrive\Documents\hackathon\best_facenet_model.pth"
-gender_model_path = r"C:\Users\ADMIN\OneDrive\Documents\hackathon\best_gender_model.pth"
-train_folder = r"C:\Users\ADMIN\OneDrive\Documents\hackathon\train"
+face_model_path = r"E:/Hackathon/best_facenet_model.pth"
+gender_model_path = r"E:/Hackathon/best_gender_model.pth"
+train_folder = r"E:/Hackathon/Processed_Dataset/train"
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Model initialization (keeping your existing logic)
@@ -509,35 +509,26 @@ class PremiumApp(ctk.CTk):
         empty_sublabel.pack()
 
     def upload_folder(self):
-        """Enhanced folder upload with progress tracking"""
-        folder_path = filedialog.askdirectory(title="Select Image Folder")
-        if not folder_path:
+        """Unified dialog: user selects one or more images from any folder"""
+        image_paths = filedialog.askopenfilenames(
+            title="Select One or More Images (Ctrl+A for all)",
+            filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp *.tiff *.webp")],
+            initialdir=os.path.expanduser("~")
+        )
+
+        if not image_paths:
             return
 
         if not models_loaded:
             messagebox.showerror("Error", "Models not loaded. Please check model paths.")
             return
 
-        # Get image files
-        image_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp')
-        image_files = [
-            os.path.join(folder_path, f)
-            for f in os.listdir(folder_path)
-            if f.lower().endswith(image_extensions)
-        ]
-
-        if not image_files:
-            messagebox.showwarning("Warning", "No image files found in the selected folder.")
-            return
-
-        # Show progress overlay
         progress_window = ProgressOverlay(self)
 
         def process_images():
             processed_images = []
 
-            # Load images
-            for i, path in enumerate(image_files):
+            for i, path in enumerate(image_paths):
                 try:
                     img = Image.open(path).convert('RGB')
                     processed_images.append((img, path))
@@ -545,34 +536,29 @@ class PremiumApp(ctk.CTk):
                     print(f"Error loading {path}: {e}")
                     continue
 
-                # Update progress
-                progress = (i + 1) / len(image_files) * 0.3  # 30% for loading
+                progress = (i + 1) / len(image_paths) * 0.3
                 self.after(0, lambda p=progress: progress_window.update_progress(p,
-                                                                                 f"Loading images... {i + 1}/{len(image_files)}"))
+                                                                                 f"Loading images... {i + 1}/{len(image_paths)}"))
 
             if not processed_images:
                 self.after(0, lambda: messagebox.showerror("Error", "No images could be loaded."))
                 self.after(0, progress_window.destroy)
                 return
 
-            # Predict
             def progress_callback(pred_progress):
-                total_progress = 0.3 + (pred_progress * 0.7)  # 70% for prediction
+                total_progress = 0.3 + (pred_progress * 0.7)
                 self.after(0, lambda: progress_window.update_progress(total_progress,
                                                                       f"Processing... {int(pred_progress * 100)}%"))
 
             self.results = batch_predict(processed_images, progress_callback=progress_callback)
 
-            # Update UI
             self.after(0, self.update_stats)
             self.after(0, self.display_results)
             self.after(0, progress_window.destroy)
 
-        # Run in thread
         thread = threading.Thread(target=process_images)
         thread.daemon = True
         thread.start()
-
     def update_stats(self):
         """Update statistics"""
         self.stats['total'] = len(self.results)
