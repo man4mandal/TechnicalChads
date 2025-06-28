@@ -116,7 +116,38 @@ The classification results for the test images will be displayed in the UI.
 3.
 ![App Preview 3](UI3.png)
 
-> _Add these images to your repo for them to render properly._
+> _Make sure to place these images in your repository root so they display correctly._
+
+---
+
+## 🎯 Sample Answer for Face Recognition and Gender Classification Training
+
+Our AI system is trained using the **FACECOM** dataset, which contains over **5,000 face images** captured under challenging conditions like blur, low light, fog, and overexposure. We approached it as a two-task pipeline:
+
+### Task A — Gender Classification:
+We fine-tuned a **pre-trained ResNet-50** model by replacing the final layer to classify between **Male** and **Female**.
+
+### Task B — Face Recognition:
+We used a **FaceNet-based architecture** (`InceptionResnetV1`) to classify unique person identities. The final dense layer maps to all known individual IDs.
+
+To ensure robustness, we applied **real-world augmentations** during training such as:
+
+- Gaussian blur  
+- Brightness and contrast variation  
+- Motion blur  
+- Shadow simulation  
+
+Both models were trained using **PyTorch**, with:
+
+- `CrossEntropyLoss` for classification  
+- Optionally, `ArcFace` loss to enhance identity separation  
+- **Adam optimizer**, cosine learning rate scheduler, and validation-based early stopping  
+
+### Evaluation Metrics:
+- **Gender:** Accuracy, F1-Score  
+- **Identity:** Top-1 Accuracy, Macro-F1  
+
+This ensures **fairness and high performance**, even under degraded visual conditions.
 
 ---
 
