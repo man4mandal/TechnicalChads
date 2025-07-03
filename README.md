@@ -133,7 +133,6 @@ python "Hackathon_Final Project.py"
 ![App Preview 2](UI2.png)  
 ![App Preview 3](UI3.png)
 
-> _Place these images in your repo directory to render them correctly on GitHub._
 
 ---
 
