@@ -24,6 +24,7 @@ TechnicalChads/
 ├── models/
 │   ├── TASK_A/
 │   │   ├── best_model.pth
+│   │   ├── task_a_labels.csv
 │   └── TASK_B/
 │       ├── best_facenet_model.pth
 │       ├── class_map.json
@@ -64,7 +65,7 @@ test/
 ### Task A: Gender Prediction
 
 ```bash
-python test.py "models/TASK_A/best_model.pth" "test/"
+python test.py "models/TASK_A/best_model.pth" "test/" "models/TASK_A/task_a_labels.csv"
 ```
 
 ### Task B: Model Evaluation
