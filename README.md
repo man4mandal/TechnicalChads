@@ -4,12 +4,12 @@
 **Participants:** Anirban Roy & Tarashankar Mandal  
 **Repository:** https://github.com/man4mandal/TechnicalChads
 
-This project implements a gender classification pipeline supporting two modes:
+This project implements a gender classification pipeline with two modes:
 
 - **Task A**: Predict gender (`Male` / `Female`) from test images.
-- **Task B**: Evaluate performance using a ground-truth CSV and class-map JSON.
+- **Task B**: Evaluate predictions using a ground-truth CSV and class-map JSON.
 
-Both tasks are executed via a single script (`main.py`), powered by PyTorch-based models with GPU support when available.
+Execution is handled via a single script (`main.py`) with optional GPU acceleration.
 
 ---
 
@@ -17,11 +17,11 @@ Both tasks are executed via a single script (`main.py`), powered by PyTorch-base
 
 ```text
 TechnicalChads/
-├── LICENSE
-├── .gitattributes
-├── README.md
 ├── main.py
 ├── requirements.txt
+├── README.md
+├── LICENSE
+├── .gitattributes
 ├── models/
 │   ├── TASK_A/
 │   │   ├── best_model.pth
@@ -31,21 +31,18 @@ TechnicalChads/
 │       ├── class_map.json
 │       └── task_b_output.csv
 └── test/
-```
-
+````
 
 ---
 
-## ⚙️ Setup & Execution Flow
+## ⚙️ Setup & Execution
 
 ```bash
-# 1. Clone the repository
-# ------------------------
+# Clone repository
 git clone https://github.com/man4mandal/TechnicalChads.git
 cd TechnicalChads
 
-# 2. Create and activate virtual environment
-# ------------------------------------------
+# Create and activate virtual environment
 python -m venv venv
 
 # On Windows:
@@ -54,22 +51,19 @@ venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
-# 3. Install dependencies
-# ------------------------
+# Install dependencies
 pip install -r requirements.txt
 
-# 4. Run Task A – Gender Prediction
-# ----------------------------------
-python main.py "model_path" "test_image_folder_path"
+# Task A: Gender Prediction
+python main.py "<model_path>" "<test_image_folder_path>"
 
-# 5. Run Task B – Evaluation
-# ---------------------------
-python main.py "model_path" "test_image_folder_path" "task_b_output.csv_path" "class_map.json_path"
+# Task B: Model Evaluation
+python main.py "<model_path>" "<test_image_folder_path>" "<task_b_output.csv_path>" "<class_map.json_path>"
 ```
 
 ---
 
-## 📦 Dependencies (`requirements.txt`)
+## 📦 Dependencies
 
 ```text
 torch
@@ -81,12 +75,13 @@ facenet-pytorch
 
 ---
 
-## ✅ Important Notes
+## ✅ Notes
 
 ```text
-- Execution is CLI-only—no notebooks or manual configuration.
-- Script auto-detects GPU if available.
-- Results must match original submission exactly—any deviation may cause disqualification.
-- Folder and file names are case-sensitive and must remain unchanged.
+- CLI-only execution; no notebooks.
+- Auto-detects GPU if available.
+- Maintain folder/file structure as-is.
 ```
-````
+
+```
+```
