@@ -82,6 +82,3 @@ facenet-pytorch
 - Auto-detects GPU if available.
 - Maintain folder/file structure as-is.
 ```
-
-```
-```
