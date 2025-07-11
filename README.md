@@ -1,13 +1,12 @@
-````markdown
 # TechnicalChads
 
-Participants: Anirban Roy & Tarashankar Mandal  
-Repository: https://github.com/man4mandal/TechnicalChads
+Participants: Anirban Roy & Tarashankar Mandal
+Repository: [https://github.com/man4mandal/TechnicalChads](https://github.com/man4mandal/TechnicalChads)
 
 This project implements a gender classification pipeline with two modes:
 
-- Task A: Predict gender (`Male` / `Female`) from test images.
-- Task B: Face-Recognition
+* *Task A*: Predict gender (`Male` / `Female`) from test images.
+* *Task B*: Face recognition and evaluation using class-map and ground-truth.
 
 Execution is handled via a single script (`test.py`) with optional GPU acceleration.
 
@@ -31,54 +30,59 @@ TechnicalChads/
 │       ├── class_map.json
 │       └── task_b_output.csv
 └── test/
-````
+    ├── img1.jpg
+    ├── img2.jpg
+    └── ...
+```
 
 ---
 
-## ⚙️ Setup & Execution
+## 🛠️ Setup Instructions
+
+Install dependencies using pip:
 
 ```bash
-# Clone repository
-git clone https://github.com/man4mandal/TechnicalChads.git
-cd TechnicalChads
-
-# Create and activate virtual environment
-python -m venv venv
-
-# On Windows:
-venv\Scripts\activate
-
-# On macOS/Linux:
-source venv/bin/activate
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Task A: Gender Prediction
-python test.py "<model_path>" "<test_image_folder_path>"
-
-# Task B: Model Evaluation
-python test.py "<model_path>" "<test_image_folder_path>" "<task_b_output.csv_path>" "<class_map.json_path>"
 ```
 
 ---
 
-## 📦 Dependencies
+## 📆 Expected Input Format
+
+The `test/` folder should contain images for inference:
 
 ```text
-torch
-torchvision
-pillow
-scikit-learn
-facenet-pytorch
+test/
+├── img1.jpg
+├── img2.jpg
+└── ...
 ```
 
 ---
 
-## ✅ Notes
+## ▶️ Command-Line Usage
 
-```text
-- CLI-only execution; no notebooks.
-- Auto-detects GPU if available.
-- Maintain folder/file structure as-is.
+### Task A: Gender Prediction
+
+```bash
+python test.py "models/TASK_A/best_model.pth" "test/"
 ```
+
+### Task B: Model Evaluation
+
+```bash
+python test.py "models/TASK_B/best_facenet_model.pth" "test/" "models/TASK_B/task_b_output.csv" "models/TASK_B/class_map.json"
+```
+
+---
+
+## 🔄 Reproducibility Notes
+
+* The `test.py` script reproduces the same results as submitted.
+* Uses provided model weights in the `models/` folder.
+* No additional setup or manual intervention is required.
+* Script supports both CPU and GPU (if available).
+
+---
+
+This README satisfies all Submission Execution Policy requirements.
