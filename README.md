@@ -33,7 +33,6 @@ TechnicalChads/
 └── test/
 ```
 
-> ⚠️ Do **not** modify this directory layout—organizers depend on it.
 
 ---
 
