@@ -9,7 +9,7 @@ This project implements a gender classification pipeline with two modes:
 - Task A: Predict gender (`Male` / `Female`) from test images.
 - Task B: Face-Recognition
 
-Execution is handled via a single script (`main.py`) with optional GPU acceleration.
+Execution is handled via a single script (`test.py`) with optional GPU acceleration.
 
 ---
 
