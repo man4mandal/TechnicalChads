@@ -7,7 +7,7 @@ Repository: https://github.com/man4mandal/TechnicalChads
 This project implements a gender classification pipeline with two modes:
 
 - Task A: Predict gender (`Male` / `Female`) from test images.
-- Task B: Evaluate predictions using a ground-truth CSV and class-map JSON.
+- Task B: Face-Recognition
 
 Execution is handled via a single script (`main.py`) with optional GPU acceleration.
 
