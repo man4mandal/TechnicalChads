@@ -24,7 +24,6 @@ TechnicalChads/
 ├── models/
 │   ├── TASK_A/
 │   │   ├── best_model.pth
-│   │   └── task_a_labels.csv
 │   └── TASK_B/
 │       ├── best_facenet_model.pth
 │       ├── class_map.json
