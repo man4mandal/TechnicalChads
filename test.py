@@ -7,10 +7,10 @@ import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
 from collections import defaultdict
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-class_names = ['Female', 'Male']  # default for Task A
+class_names = ['Female', 'Male']
 
 def load_class_map(json_path):
     with open(json_path, 'r') as f:
@@ -25,10 +25,7 @@ def load_ground_truth(csv_path):
     return gt
 
 def load_model(model_path, num_classes, backbone="resnet34"):
-    if backbone == "resnet18":
-        model = models.resnet18(pretrained=False)
-    else:
-        model = models.resnet34(pretrained=False)
+    model = models.resnet18(pretrained=False) if backbone == "resnet18" else models.resnet34(pretrained=False)
     model.fc = nn.Linear(model.fc.in_features, num_classes)
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.to(device)
@@ -105,7 +102,7 @@ def evaluate_with_gt(model_path, test_folder, label_csv_path, class_map_path):
     print(f"Recall:    {avg_recall:.4f}")
     print(f"F1-score:  {avg_f1:.4f}")
 
-def predict_only(model_path, test_folder, output_csv):
+def predict_only(model_path, test_folder, output_csv, label_csv_path):
     model = load_model(model_path, len(class_names), backbone="resnet34")
     image_files = [f for f in os.listdir(test_folder) if f.lower().endswith(".jpg")]
     image_files_sorted = sorted(image_files, key=lambda x: int(os.path.splitext(x)[0]))
@@ -126,12 +123,10 @@ def predict_only(model_path, test_folder, output_csv):
 
     print(f"\n✅ Predictions CSV saved to: {output_csv}")
 
-    # Quick self-evaluation (not real ground truth)
-    label_to_index = {name: idx for idx, name in enumerate(class_names)}
-    y_pred = [label_to_index[p] for p in predictions]
-    y_true = y_pred  # Only for dummy metrics
+    ground_truth = load_ground_truth(label_csv_path)
+    y_true = [ground_truth[f] for f in filenames if f in ground_truth]
+    y_pred = [pred for f, pred in zip(filenames, predictions) if f in ground_truth]
 
-    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
     acc = accuracy_score(y_true, y_pred)
     prec = precision_score(y_true, y_pred, average='macro')
     rec = recall_score(y_true, y_pred, average='macro')
@@ -144,26 +139,27 @@ def predict_only(model_path, test_folder, output_csv):
     print(f"F1-score:  {f1:.4f}")
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 3:
+    if len(sys.argv) == 5:
         model_path = sys.argv[1]
         test_folder = sys.argv[2]
-
-        if len(sys.argv) == 5:
-            label_csv_path = sys.argv[3]
-            class_map_path = sys.argv[4]
-            evaluate_with_gt(model_path, test_folder, label_csv_path, class_map_path)
-        else:
-            output_csv = os.path.join(test_folder, "predictions.csv")
-            predict_only(model_path, test_folder, output_csv)
+        label_csv_path = sys.argv[3]
+        class_map_path = sys.argv[4]
+        evaluate_with_gt(model_path, test_folder, label_csv_path, class_map_path)
+    elif len(sys.argv) == 4:
+        model_path = sys.argv[1]
+        test_folder = sys.argv[2]
+        label_csv_path = sys.argv[3]
+        output_csv = os.path.join(test_folder, "predictions.csv")
+        predict_only(model_path, test_folder, output_csv, label_csv_path)
     else:
         print("🔄 No command-line arguments detected. Switching to interactive input mode.")
         model_path = input("Enter the path to the model (.pth) file: ").strip()
         test_folder = input("Enter the path to the test images folder: ").strip()
-        choice = input("Do you have ground truth CSV and class map? (y/n): ").strip().lower()
-        if choice == 'y':
-            label_csv_path = input("Enter the path to the ground truth CSV file: ").strip()
-            class_map_path = input("Enter the path to the class map JSON file: ").strip()
+        label_csv_path = input("Enter the path to the ground truth CSV file: ").strip()
+        class_map_path = input("Enter the path to the class map JSON file (or leave blank for Task A): ").strip()
+
+        output_csv = os.path.join(test_folder, "predictions.csv")
+        if class_map_path:
             evaluate_with_gt(model_path, test_folder, label_csv_path, class_map_path)
         else:
-            output_csv = os.path.join(test_folder, "predictions.csv")
-            predict_only(model_path, test_folder, output_csv)
+            predict_only(model_path, test_folder, output_csv, label_csv_path)
