@@ -17,7 +17,7 @@ Execution is handled via a single script (`main.py`) with optional GPU accelerat
 
 ```text
 TechnicalChads/
-├── main.py
+├── test.py
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
