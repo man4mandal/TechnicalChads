@@ -1,13 +1,13 @@
 ````markdown
 # TechnicalChads
 
-**Participants:** Anirban Roy & Tarashankar Mandal  
-**Repository:** https://github.com/man4mandal/TechnicalChads
+Participants: Anirban Roy & Tarashankar Mandal  
+Repository: https://github.com/man4mandal/TechnicalChads
 
 This project implements a gender classification pipeline with two modes:
 
-- **Task A**: Predict gender (`Male` / `Female`) from test images.
-- **Task B**: Evaluate predictions using a ground-truth CSV and class-map JSON.
+- Task A: Predict gender (`Male` / `Female`) from test images.
+- Task B: Evaluate predictions using a ground-truth CSV and class-map JSON.
 
 Execution is handled via a single script (`main.py`) with optional GPU acceleration.
 
