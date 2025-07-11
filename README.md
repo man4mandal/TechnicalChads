@@ -55,10 +55,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Task A: Gender Prediction
-python main.py "<model_path>" "<test_image_folder_path>"
+python test.py "<model_path>" "<test_image_folder_path>"
 
 # Task B: Model Evaluation
-python main.py "<model_path>" "<test_image_folder_path>" "<task_b_output.csv_path>" "<class_map.json_path>"
+python test.py "<model_path>" "<test_image_folder_path>" "<task_b_output.csv_path>" "<class_map.json_path>"
 ```
 
 ---
